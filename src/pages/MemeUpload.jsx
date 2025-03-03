@@ -9,8 +9,8 @@ const MemeUpload = () => {
   const [uploading, setUploading] = useState(false);
   const [uploadedMemes, setUploadedMemes] = useState([]);
 
-  const API_KEY = "f1007a2f3cabfe9725b1ec44043e3468"; // Replace with your actual ImgBB API key
-
+  const API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
+  
   // Load memes from Firestore on mount
   useEffect(() => {
     fetchUploadedMemes();

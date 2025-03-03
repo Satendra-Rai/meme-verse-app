@@ -14,6 +14,8 @@ const UserProfile = () => {
     fetchUploadedMemes();
     fetchLikedMemes();
   }, []);
+  const API_KEY = import.meta.env.VITE_IMGBB_API_KEY;
+  console.log("ImgBB API Key:", API_KEY); // Check if it's loaded correctly
 
   const fetchUserProfile = async () => {
     try {
@@ -68,11 +70,17 @@ const UserProfile = () => {
     formData.append("image", selectedFile);
 
     try {
-      const response = await axios.post("https://api.imgbb.com/1/upload?key=f1007a2f3cabfe9725b1ec44043e3468", formData);
+      const response = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${API_KEY}`,
+        formData
+      );
       const imageUrl = response.data.data.url;
       setProfile((prevProfile) => ({ ...prevProfile, profilePic: imageUrl }));
-      
-      await setDoc(doc(db, "users", "guest"), { ...profile, profilePic: imageUrl });
+
+      await setDoc(doc(db, "users", "guest"), {
+        ...profile,
+        profilePic: imageUrl,
+      });
       alert("Profile picture updated!");
     } catch (error) {
       console.error("Error uploading image:", error);
@@ -84,7 +92,7 @@ const UserProfile = () => {
       {/* Left Side - User Details */}
       <div className="flex flex-col items-center bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md">
         <h1 className="text-3xl font-bold mb-4 text-center">User Profile</h1>
-        
+
         <img
           src={profile.profilePic || "https://via.placeholder.com/150"}
           alt="Profile"
@@ -132,7 +140,12 @@ const UserProfile = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
           {uploadedMemes.length > 0 ? (
             uploadedMemes.map((meme, index) => (
-              <img key={index} src={meme} alt="Uploaded Meme" className="w-full rounded-lg shadow-md" />
+              <img
+                key={index}
+                src={meme}
+                alt="Uploaded Meme"
+                className="w-full rounded-lg shadow-md"
+              />
             ))
           ) : (
             <p className="text-center col-span-full">No uploaded memes yet.</p>
@@ -144,7 +157,12 @@ const UserProfile = () => {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
           {likedMemes.length > 0 ? (
             likedMemes.map((meme, index) => (
-              <img key={index} src={meme} alt="Liked Meme" className="w-full rounded-lg shadow-md" />
+              <img
+                key={index}
+                src={meme}
+                alt="Liked Meme"
+                className="w-full rounded-lg shadow-md"
+              />
             ))
           ) : (
             <p className="text-center col-span-full">No liked memes yet.</p>
