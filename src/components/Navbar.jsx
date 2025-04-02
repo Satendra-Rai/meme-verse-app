@@ -31,7 +31,7 @@ const Navbar = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <Link to="/">MemeVerse</Link>
+        <Link to="/" className="text-3xl">MemeVerse</Link>
       </motion.div>
 
       {/* Desktop Menu */}
