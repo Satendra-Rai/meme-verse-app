@@ -66,7 +66,7 @@ const MemeUpload = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 text-center">
+    <div className="container mx-auto p-6 text-center">
       <h1 className="text-4xl font-bold mb-6">Upload Your Meme</h1>
       
       <input type="file" accept="image/*" onChange={handleImageChange} className="mb-4" />

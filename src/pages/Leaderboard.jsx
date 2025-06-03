@@ -43,7 +43,7 @@ const Leaderboard = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors">
-      <div className="container mx-auto p-4 text-center">
+      <div className="container mx-auto p-6 text-center">
         <h1 className="text-4xl font-bold mb-6">Leaderboard</h1>
 
         {/* Top 10 Most Liked Memes */}
